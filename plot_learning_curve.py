@@ -4,14 +4,11 @@ class PlotLosses(tf.keras.callbacks.Callback):
         self.i = 0
         self.x = []
         self.losses = []
-        self.val_losses = []
-        
+        self.val_losses = []        
         self.fig = plt.figure()
-        
         self.logs = []
 
     def on_epoch_end(self, epoch, logs={}):
-        
         self.logs.append(logs)
         self.x.append(self.i)
         self.losses.append(logs.get('loss'))
@@ -23,5 +20,5 @@ class PlotLosses(tf.keras.callbacks.Callback):
         plt.plot(self.x, self.losses, label="loss", marker='o')
         plt.plot(self.x, self.val_losses, label="val_loss", marker='o')
         plt.legend()
-        plt.xticks([i for i in range(epochs)])
+        plt.xticks([i for i in range(epoch)])
         plt.show()
